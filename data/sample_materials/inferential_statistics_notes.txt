@@ -1,0 +1,209 @@
+INFERENTIAL STATISTICS — SAMPLE STUDY NOTES
+Data Science Exit Exam Preparation
+[Sample educational material — not official university examination content]
+
+================================================================
+CHAPTER 1: WHAT IS INFERENTIAL STATISTICS?
+================================================================
+
+Inferential statistics uses data from a sample to draw conclusions about a larger
+population. Because it is rarely practical to measure an entire population, we
+collect a representative sample and use statistical methods to make inferences.
+
+Key distinction:
+  - Descriptive statistics: summarises the data you actually have (mean, median,
+    standard deviation, charts). It does not go beyond the observed data.
+  - Inferential statistics: uses the sample to make statements about the population,
+    with quantified uncertainty. Examples: hypothesis tests, confidence intervals.
+
+Population: the complete group we want to study.
+Sample: a subset of the population that we actually observe.
+Parameter: a numerical characteristic of the population (e.g., the true mean μ).
+Statistic: a numerical characteristic of the sample (e.g., the sample mean x̄).
+
+================================================================
+CHAPTER 2: SAMPLING
+================================================================
+
+Simple Random Sample: every individual in the population has an equal chance
+of being selected. This minimizes selection bias.
+
+Stratified Sample: the population is divided into subgroups (strata) and a
+random sample is drawn from each stratum. Ensures all subgroups are represented.
+
+Systematic Sample: select every k-th individual from a list.
+
+Convenience Sample: select whoever is easiest to reach. This often introduces
+bias and should be avoided for formal inference.
+
+Sampling Bias: when the sample is not representative of the population,
+conclusions drawn from it may not hold for the population.
+
+Central Limit Theorem (CLT): if we draw many independent random samples of
+size n from any population with a finite mean μ and standard deviation σ,
+the distribution of sample means will approach a normal distribution as n
+increases, regardless of the shape of the original population.
+
+Implication: for sufficiently large samples (commonly n ≥ 30), we can use
+normal-distribution methods even when the population is not normally distributed.
+
+================================================================
+CHAPTER 3: HYPOTHESIS TESTING
+================================================================
+
+A hypothesis test evaluates whether sample data provides enough evidence to
+reject a default assumption about the population.
+
+The Null Hypothesis (H₀): the default assumption — often a statement of
+"no effect", "no difference", or "no relationship". We assume H₀ is true
+until evidence forces us to reject it.
+
+The Alternative Hypothesis (H₁ or Hₐ): the claim we are testing — the effect,
+difference, or relationship we want to detect.
+
+Examples:
+  H₀: The new drug has no effect on blood pressure (mean change = 0).
+  H₁: The new drug does change blood pressure (mean change ≠ 0).
+
+  H₀: The mean exam score of Group A equals the mean of Group B.
+  H₁: The mean exam score of Group A is greater than that of Group B.
+
+The Logic of Hypothesis Testing:
+  1. Assume H₀ is true.
+  2. Calculate how likely it is to observe our sample result (or something more extreme)
+     if H₀ were true.
+  3. If this probability is very small, the data are inconsistent with H₀, so we
+     reject H₀.
+  4. If this probability is not very small, we fail to reject H₀ (we do NOT say
+     we "accept" H₀ — absence of evidence is not evidence of absence).
+
+================================================================
+CHAPTER 4: THE P-VALUE
+================================================================
+
+The p-value is the probability of obtaining a test statistic at least as extreme
+as the one observed, assuming the null hypothesis is true.
+
+  p-value = P(data this extreme OR MORE extreme | H₀ is true)
+
+How to interpret the p-value:
+  - Small p-value (e.g., p < 0.05): the observed result would be unlikely if H₀
+    were true. This is considered statistically significant evidence against H₀.
+    We reject H₀.
+  - Large p-value (e.g., p ≥ 0.05): the observed result is not unusual if H₀
+    were true. We fail to reject H₀.
+
+The significance level α is the threshold we set in advance (before seeing the data):
+  - Common choices: α = 0.05, α = 0.01, α = 0.10.
+  - If p ≤ α, we reject H₀.
+  - If p > α, we fail to reject H₀.
+
+Critical misconceptions about p-values:
+  - The p-value is NOT the probability that H₀ is true.
+  - The p-value is NOT the probability of making a mistake.
+  - Statistical significance does NOT imply practical importance.
+  - A large p-value does NOT mean H₀ is true — only that there is insufficient
+    evidence to reject it.
+
+================================================================
+CHAPTER 5: TYPE I AND TYPE II ERRORS
+================================================================
+
+Errors in hypothesis testing:
+
+  Type I Error (False Positive): we reject H₀ when H₀ is actually true.
+    Probability of Type I error = α (the significance level).
+    Example: concluding a drug works when it actually has no effect.
+
+  Type II Error (False Negative): we fail to reject H₀ when H₁ is actually true.
+    Probability of Type II error = β.
+    Example: concluding a drug has no effect when it actually does work.
+
+Power of a test: the probability of correctly rejecting H₀ when H₁ is true.
+    Power = 1 − β
+
+Increasing sample size increases power (reduces β) without changing α.
+There is a trade-off: decreasing α (being more conservative about rejecting H₀)
+increases β (making it harder to detect real effects).
+
+================================================================
+CHAPTER 6: CONFIDENCE INTERVALS
+================================================================
+
+A confidence interval provides a range of plausible values for a population
+parameter, with a stated level of confidence.
+
+A 95% confidence interval for a population mean is computed as:
+    x̄ ± z * (σ / √n)
+
+where:
+  x̄   = sample mean
+  z    = critical value from the standard normal distribution (z = 1.96 for 95%)
+  σ    = population standard deviation (or sample std s if σ is unknown)
+  n    = sample size
+
+Interpretation: if we repeated this procedure many times, 95% of the intervals
+constructed this way would contain the true population mean.
+
+IMPORTANT: A 95% CI does NOT mean there is a 95% probability that the true
+mean lies in this specific interval. The true mean is fixed; the interval
+is random. After computing, the interval either contains the true mean or it does not.
+
+Relationship to hypothesis testing:
+  - If a 95% CI does not contain the null value, the two-sided test rejects H₀
+    at α = 0.05.
+  - A narrower CI indicates more precision (larger sample or less variance).
+  - A wider CI indicates more uncertainty.
+
+================================================================
+CHAPTER 7: COMMON STATISTICAL TESTS
+================================================================
+
+One-sample t-test: tests whether a sample mean equals a hypothesised value.
+  Use when: comparing sample mean to a known standard.
+
+Two-sample t-test (independent): tests whether two independent group means differ.
+  Use when: comparing outcomes between two different groups.
+
+Paired t-test: tests whether the mean difference within pairs is zero.
+  Use when: the same subjects are measured before and after an intervention.
+
+Chi-squared test of independence: tests whether two categorical variables are
+related or independent.
+  Use when: both variables are categorical (e.g., gender and voting preference).
+
+ANOVA (Analysis of Variance): tests whether means differ across three or more groups.
+  Use when: comparing more than two group means.
+
+Assumptions that must be checked:
+  - t-tests assume approximate normality (or large n by CLT) and homogeneity of variance.
+  - Chi-squared test requires adequate expected cell frequencies (≥ 5 in each cell).
+  - All tests assume random sampling.
+
+================================================================
+CHAPTER 8: CORRELATION AND REGRESSION IN INFERENTIAL STATISTICS
+================================================================
+
+Pearson Correlation Coefficient (r): measures the linear relationship between
+two continuous variables. Ranges from −1 (perfect negative) to +1 (perfect positive).
+r = 0 indicates no linear relationship.
+
+Testing whether r equals zero:
+  H₀: ρ = 0 (no linear relationship in the population)
+  H₁: ρ ≠ 0 (a linear relationship exists)
+  A t-test is used to evaluate this hypothesis.
+
+Correlation does NOT imply causation. Two variables can be correlated because:
+  - One causes the other.
+  - Both are caused by a third variable (confounding).
+  - The correlation is coincidental.
+
+Simple Linear Regression (inference):
+  - We test whether the population slope β₁ equals zero.
+  - H₀: β₁ = 0 (the predictor has no linear effect on the outcome)
+  - H₁: β₁ ≠ 0 (the predictor has a linear effect)
+  - The p-value for the slope tells us whether the predictor is statistically significant.
+
+R-squared (R²) in regression: the proportion of variance in the outcome variable
+explained by the predictor(s). R² = 0.80 means 80% of the variance in y is
+accounted for by the model.

@@ -1,0 +1,204 @@
+MACHINE LEARNING — SAMPLE STUDY NOTES
+Data Science Exit Exam Preparation
+[Sample educational material — not official university examination content]
+
+================================================================
+CHAPTER 1: WHAT IS MACHINE LEARNING?
+================================================================
+
+Machine learning is a branch of artificial intelligence in which a computer program
+learns patterns from data without being explicitly programmed for each task. Instead
+of writing rules by hand, we give the algorithm examples and let it discover the rules.
+
+There are three main categories of machine learning:
+  1. Supervised Learning
+  2. Unsupervised Learning
+  3. Reinforcement Learning
+
+================================================================
+CHAPTER 2: SUPERVISED LEARNING
+================================================================
+
+In supervised learning, every training example has both an input (features) and a
+known output (label). The algorithm learns a mapping from inputs to outputs by
+minimizing the difference between its predictions and the known labels.
+
+The word "supervised" comes from the idea that a teacher (the labels) guides the
+learning process.
+
+Examples of supervised learning tasks:
+  - Predicting house prices given square footage, location, and number of rooms
+    (this is a regression task because the output is a continuous number).
+  - Deciding whether an email is spam or not spam
+    (this is a classification task because the output is a category).
+
+Key terms in supervised learning:
+  - Features (X): the input variables given to the model.
+  - Label (y): the correct output value used during training.
+  - Training set: the subset of data used to fit the model parameters.
+  - Test set: the subset of data held back to evaluate final model performance.
+  - Validation set: an optional third split used to tune hyperparameters.
+
+================================================================
+CHAPTER 3: UNSUPERVISED LEARNING
+================================================================
+
+In unsupervised learning, the training data contains only inputs — there are no
+labels. The algorithm must find structure or patterns entirely on its own.
+
+Common unsupervised learning tasks:
+  - Clustering: grouping similar examples together (e.g., K-Means, DBSCAN).
+  - Dimensionality reduction: compressing many features into fewer dimensions
+    while preserving structure (e.g., PCA — Principal Component Analysis).
+  - Anomaly detection: identifying data points that differ significantly from
+    the majority.
+
+Unsupervised learning is harder to evaluate than supervised learning because
+there is no ground-truth label to compare against.
+
+================================================================
+CHAPTER 4: CLASSIFICATION
+================================================================
+
+Classification is a supervised learning task where the output is a discrete category.
+
+Binary classification: two possible output classes (e.g., yes/no, spam/not spam).
+Multi-class classification: three or more output classes (e.g., classifying a digit
+as 0 through 9).
+
+Common classification algorithms:
+  - Logistic Regression (despite the name, it is a classification algorithm)
+  - Decision Trees
+  - Random Forests
+  - Support Vector Machines (SVM)
+  - K-Nearest Neighbours (KNN)
+  - Neural Networks
+
+The decision boundary is the line (or surface) that separates different classes.
+
+================================================================
+CHAPTER 5: REGRESSION
+================================================================
+
+Regression is a supervised learning task where the output is a continuous number.
+
+Simple linear regression models the relationship between one feature x and a
+continuous target y as:
+    y = w * x + b
+where w is the weight (slope) and b is the bias (intercept).
+
+Multiple linear regression extends this to many features:
+    y = w1*x1 + w2*x2 + ... + wn*xn + b
+
+Non-linear regression uses curves instead of straight lines. Polynomial regression
+fits a polynomial to the data. Neural networks can approximate any non-linear function.
+
+Common regression metrics:
+  - Mean Absolute Error (MAE): average of the absolute differences.
+  - Mean Squared Error (MSE): average of the squared differences (penalizes large errors more).
+  - Root Mean Squared Error (RMSE): square root of MSE, in the same units as y.
+  - R-squared (R²): the proportion of variance in y that the model explains. R² = 1 is perfect.
+
+================================================================
+CHAPTER 6: TRAINING AND TEST SETS
+================================================================
+
+To evaluate a model honestly we must test it on data it has never seen during training.
+If we tested on the training data, the model's score would be misleadingly high because
+it may have simply memorized the examples.
+
+Standard procedure:
+  1. Split the full dataset into a training set and a test set.
+  2. Fit (train) the model only on the training set.
+  3. Evaluate the model only on the test set.
+  4. Report the test-set score as the final performance measure.
+
+A common split ratio is 80% training and 20% test. For small datasets, cross-validation
+is preferred over a single split.
+
+K-Fold Cross-Validation:
+  - Divide data into k equal parts called folds.
+  - Train on k-1 folds and evaluate on the remaining fold.
+  - Repeat k times, each time using a different fold for evaluation.
+  - Average the k scores to get a stable performance estimate.
+
+================================================================
+CHAPTER 7: OVERFITTING AND UNDERFITTING
+================================================================
+
+Overfitting occurs when a model learns the training data too well, including its noise
+and random fluctuations. An overfit model achieves high accuracy on training data but
+performs poorly on new, unseen data. It has memorized rather than generalized.
+
+Signs of overfitting:
+  - Training accuracy is much higher than test accuracy.
+  - The model is unnecessarily complex (e.g., a high-degree polynomial for simple data).
+
+Underfitting occurs when a model is too simple to capture the underlying pattern in
+the data. It performs poorly on both training and test data.
+
+Signs of underfitting:
+  - Both training accuracy and test accuracy are low.
+  - The model is too simple (e.g., fitting a straight line to clearly curved data).
+
+The bias-variance trade-off:
+  - High bias → underfitting: the model makes strong assumptions and misses patterns.
+  - High variance → overfitting: the model is too sensitive to training data noise.
+  - The goal is to find the sweet spot with low bias and low variance.
+
+Techniques to reduce overfitting:
+  - Collect more training data.
+  - Use regularization (L1/Lasso, L2/Ridge) to penalize large weights.
+  - Reduce model complexity (fewer layers, fewer features).
+  - Use dropout in neural networks.
+  - Use cross-validation to select hyperparameters.
+
+================================================================
+CHAPTER 8: CLASSIFICATION METRICS
+================================================================
+
+Accuracy is the fraction of predictions that are correct:
+    Accuracy = (Correct predictions) / (Total predictions)
+
+Accuracy can be misleading when class sizes are very different (class imbalance).
+For example, if 95% of emails are not spam, a classifier that always predicts
+"not spam" achieves 95% accuracy but is useless.
+
+The confusion matrix summarizes classification results:
+
+                        Predicted Positive    Predicted Negative
+  Actual Positive            TP                    FN
+  Actual Negative            FP                    TN
+
+  TP = True Positive   (correctly predicted positive)
+  TN = True Negative   (correctly predicted negative)
+  FP = False Positive  (incorrectly predicted positive — Type I error)
+  FN = False Negative  (incorrectly predicted negative — Type II error)
+
+Precision answers the question: of all examples predicted positive, how many
+actually were positive?
+    Precision = TP / (TP + FP)
+High precision means few false alarms.
+
+Recall (also called Sensitivity) answers: of all actual positives, how many
+did the model correctly identify?
+    Recall = TP / (TP + FN)
+High recall means few missed positives.
+
+F1-Score is the harmonic mean of precision and recall. It balances both:
+    F1 = 2 * (Precision * Recall) / (Precision + Recall)
+
+Use F1-score when both false positives and false negatives matter and when
+classes are imbalanced.
+
+When to prioritize precision: spam detection (a false positive incorrectly
+labels a legitimate email as spam, which is annoying).
+
+When to prioritize recall: medical diagnosis (a false negative misses a
+disease, which is dangerous).
+
+ROC Curve and AUC:
+  - ROC (Receiver Operating Characteristic) curve plots True Positive Rate vs
+    False Positive Rate at different classification thresholds.
+  - AUC (Area Under the Curve) summarizes the ROC curve in one number.
+  - AUC = 1.0 is a perfect classifier; AUC = 0.5 is random guessing.

@@ -1,0 +1,66 @@
+[
+  {
+    "id": "ml_001",
+    "question": "What is the difference between overfitting and underfitting?",
+    "expected_keywords": ["overfitting", "training", "test", "memorized", "generaliz", "underfitting", "simple", "bias", "variance"],
+    "expected_source": "machine_learning_notes.txt",
+    "manually_verified_answer": "Overfitting occurs when a model learns training data too well including noise, achieving high training accuracy but poor test accuracy. Underfitting occurs when a model is too simple to capture patterns, performing poorly on both training and test data. The bias-variance trade-off describes this: high variance leads to overfitting, high bias leads to underfitting."
+  },
+  {
+    "id": "ml_002",
+    "question": "What is the F1-score and when should you use it?",
+    "expected_keywords": ["F1", "precision", "recall", "harmonic mean", "imbalanced", "false positive", "false negative"],
+    "expected_source": "machine_learning_notes.txt",
+    "manually_verified_answer": "F1-score is the harmonic mean of precision and recall: F1 = 2*(Precision*Recall)/(Precision+Recall). Use it when both false positives and false negatives matter and when classes are imbalanced, because accuracy alone is misleading with imbalanced classes."
+  },
+  {
+    "id": "ml_003",
+    "question": "What is the purpose of a training set and a test set?",
+    "expected_keywords": ["training", "test", "unseen", "evaluate", "memorized", "honest", "split"],
+    "expected_source": "machine_learning_notes.txt",
+    "manually_verified_answer": "The training set is used to fit model parameters. The test set is held back and used only for final evaluation, to measure how well the model generalizes to data it has never seen. Testing on training data would give misleadingly high scores."
+  },
+  {
+    "id": "stat_001",
+    "question": "What does a p-value tell you in a hypothesis test?",
+    "expected_keywords": ["p-value", "probability", "null hypothesis", "extreme", "reject", "significance"],
+    "expected_source": "inferential_statistics_notes.txt",
+    "manually_verified_answer": "The p-value is the probability of observing a test statistic at least as extreme as the one calculated, assuming the null hypothesis is true. A small p-value (below the significance level alpha) means the data are unlikely under H0, providing evidence to reject H0."
+  },
+  {
+    "id": "stat_002",
+    "question": "What is a confidence interval and how do you interpret a 95% confidence interval?",
+    "expected_keywords": ["confidence interval", "range", "population", "parameter", "95%", "repeated"],
+    "expected_source": "inferential_statistics_notes.txt",
+    "manually_verified_answer": "A confidence interval gives a range of plausible values for a population parameter. A 95% CI means that if the procedure were repeated many times, 95% of the constructed intervals would contain the true population parameter. It does NOT mean there is a 95% probability the true value is in this specific interval."
+  },
+  {
+    "id": "stat_003",
+    "question": "What is the difference between the null hypothesis and the alternative hypothesis?",
+    "expected_keywords": ["null hypothesis", "H0", "alternative", "H1", "no effect", "no difference", "default"],
+    "expected_source": "inferential_statistics_notes.txt",
+    "manually_verified_answer": "The null hypothesis (H0) is the default assumption of no effect, no difference, or no relationship. The alternative hypothesis (H1) is the claim being tested — the effect or difference we want to detect. We assume H0 is true and look for evidence strong enough to reject it."
+  },
+  {
+    "id": "ai_001",
+    "question": "What is the difference between narrow AI and general AI?",
+    "expected_keywords": ["narrow", "specific", "one task", "general", "AGI", "hypothetical", "human"],
+    "expected_source": "ai_fundamentals_notes.txt",
+    "manually_verified_answer": "Narrow AI (Weak AI) is designed for one specific task such as playing chess or filtering spam, and is not intelligent in a general sense. General AI (Strong AI or AGI) refers to a hypothetical system with human-like general reasoning across any intellectual task. No AGI system exists today."
+  },
+  {
+    "id": "ai_002",
+    "question": "What is RAG and why does it reduce hallucination?",
+    "expected_keywords": ["RAG", "retrieval", "augmented", "generation", "retrieved", "passages", "hallucination", "grounding", "evidence"],
+    "expected_source": "ai_fundamentals_notes.txt",
+    "manually_verified_answer": "RAG (Retrieval-Augmented Generation) combines a retrieval system with an LLM. It finds relevant passages from a trusted document store and provides them to the LLM as context. This reduces hallucination because the LLM generates its answer based on retrieved evidence rather than relying solely on what it learned during training."
+  },
+  {
+    "id": "unsupported_001",
+    "question": "What is the capital of France?",
+    "expected_keywords": [],
+    "expected_source": null,
+    "expected_behavior": "insufficient_evidence",
+    "manually_verified_answer": "This question is not covered by the course materials. The system should return an insufficient-evidence message rather than answering from general knowledge."
+  }
+]

@@ -1,0 +1,33 @@
+# ExamPilot AI — Python dependencies
+# Install with:  pip install -r requirements.txt
+#
+# Versions are pinned to the ones tested during development.
+# If you encounter a conflict, remove the version pin (==X.Y.Z) to allow pip
+# to resolve a compatible version automatically.
+
+# ---- User Interface ----
+streamlit==1.66.0           # Web application framework
+
+# ---- Document Processing ----
+pymupdf==1.24.14            # PDF text extraction (import as 'fitz')
+
+# ---- Embeddings ----
+sentence-transformers==3.3.1  # Semantic embedding model (all-MiniLM-L6-v2)
+
+# ---- Numerical Computation ----
+numpy>=2.0.0                # Array operations for vector similarity search
+scikit-learn>=1.4.0         # Additional ML utilities (already installed)
+
+# ---- LLM Provider ----
+google-genai>=2.0.0         # Current Google Gemini SDK (Interactions API)
+
+# ---- Configuration ----
+python-dotenv>=1.0.0        # Load API keys from .env file
+
+# ---- Testing ----
+pytest>=8.0.0               # Test runner
+
+# ---- Already in your environment (listed for completeness) ----
+# pandas
+# matplotlib
+# plotly

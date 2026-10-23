@@ -1,0 +1,60 @@
+# ============================================================
+# ExamPilot AI — .gitignore
+# ============================================================
+
+# --- Secret files: NEVER commit these ---
+.env
+*.env
+secrets.toml
+.streamlit/secrets.toml
+
+# --- Python build and cache ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# --- Virtual environments ---
+venv/
+env/
+.venv/
+ENV/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+*.ipynb
+
+# --- Test / coverage reports ---
+.pytest_cache/
+.coverage
+htmlcov/
+*.coveragerc
+
+# --- IDE and editor ---
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# --- Model cache (downloaded automatically by sentence-transformers) ---
+# Uncomment below if you want to ignore the model cache folder.
+# Note: committing the model would make the repo very large.
+# .cache/
+
+# --- Temporary files ---
+*.tmp
+*.temp
+tmp/
+
+# --- Generated files that can be recreated ---
+# (We keep the data/sample_materials because they are original content)

@@ -1,0 +1,208 @@
+INTRODUCTION TO ARTIFICIAL INTELLIGENCE — SAMPLE STUDY NOTES
+Data Science Exit Exam Preparation
+[Sample educational material — not official university examination content]
+
+================================================================
+CHAPTER 1: WHAT IS ARTIFICIAL INTELLIGENCE?
+================================================================
+
+Artificial Intelligence (AI) is the field of computer science that aims to create
+systems capable of performing tasks that would normally require human intelligence.
+These tasks include understanding language, recognising images, making decisions,
+solving problems, and learning from experience.
+
+Narrow AI (Weak AI): systems designed for one specific task. Examples include
+a chess engine, a spam filter, or a voice assistant. These systems are not
+intelligent in a general sense; they are powerful pattern matchers within
+a defined domain.
+
+General AI (Strong AI): a hypothetical system that could perform any
+intellectual task that a human can. No such system exists today.
+
+Artificial General Intelligence (AGI): research goal of creating a machine
+with human-like general reasoning abilities. This remains an open research problem.
+
+The Turing Test: proposed by Alan Turing in 1950. A machine passes the test
+if a human judge cannot distinguish its responses from those of a human through
+a text conversation. The Turing Test measures conversational behavior, not
+true understanding.
+
+================================================================
+CHAPTER 2: SEARCH AND PROBLEM SOLVING
+================================================================
+
+Many early AI problems were framed as search problems: find a path through a
+space of possible states from an initial state to a goal state.
+
+Uninformed Search (Blind Search):
+  - Breadth-First Search (BFS): explores all nodes at depth d before depth d+1.
+    Guaranteed to find the shortest path. Memory-intensive.
+  - Depth-First Search (DFS): explores one branch fully before backtracking.
+    Memory-efficient but not guaranteed to find the shortest path.
+  - Uniform Cost Search: like BFS but expands the lowest-cost node first.
+
+Informed Search (Heuristic Search):
+  - Uses a heuristic function h(n) to estimate the cost from node n to the goal.
+  - Greedy Best-First Search: expands the node with the lowest h(n).
+    Fast but not optimal.
+  - A* Search: expands the node with the lowest f(n) = g(n) + h(n), where
+    g(n) is the actual cost from start to n. Optimal if the heuristic is admissible
+    (never overestimates).
+
+================================================================
+CHAPTER 3: KNOWLEDGE REPRESENTATION
+================================================================
+
+For an AI system to reason about the world, it needs to represent knowledge
+in a form a computer can process.
+
+Propositional Logic: uses propositions (true/false statements) and logical
+connectives (AND, OR, NOT, IMPLIES). Cannot express relationships between
+objects easily.
+
+First-Order Logic (Predicate Logic): extends propositional logic with
+quantifiers (for all ∀, there exists ∃) and predicates. Can express
+rich relational knowledge.
+
+Semantic Networks: graphs where nodes are concepts and edges are relationships.
+Ontologies: formal, shared representations of knowledge in a domain.
+
+Knowledge Graphs: large-scale semantic networks used by systems like Google
+Search to represent real-world entities and their relationships.
+
+================================================================
+CHAPTER 4: EXPERT SYSTEMS
+================================================================
+
+Expert systems were early AI programs that encoded the knowledge of human
+experts as rules of the form IF condition THEN action.
+
+Components:
+  - Knowledge Base: stores the facts and rules.
+  - Inference Engine: applies rules to facts to derive new conclusions.
+  - User Interface: allows users to query the system.
+
+Limitations of expert systems:
+  - Acquiring knowledge from experts is slow and expensive.
+  - Rules must be updated manually when knowledge changes.
+  - They cannot handle situations outside the predefined rules.
+  - They do not learn from data.
+
+Expert systems led to the development of machine learning, which automates
+knowledge acquisition from data.
+
+================================================================
+CHAPTER 5: NEURAL NETWORKS
+================================================================
+
+A neural network is a computational model loosely inspired by the structure
+of the brain. It consists of layers of connected units called neurons.
+
+Structure of a feedforward neural network:
+  - Input layer: receives the raw features.
+  - Hidden layers: learn intermediate representations.
+  - Output layer: produces the final prediction.
+
+Each connection has a weight. Each neuron applies an activation function
+to its weighted sum of inputs to introduce non-linearity.
+
+Common activation functions:
+  - Sigmoid: maps input to (0, 1). Used in binary output layers.
+  - ReLU (Rectified Linear Unit): max(0, x). Most common in hidden layers.
+  - Softmax: converts a vector of scores into a probability distribution.
+    Used in multi-class output layers.
+
+Training a neural network:
+  - Forward pass: compute predictions given current weights.
+  - Compute loss: measure the difference between predictions and labels.
+  - Backward pass (backpropagation): compute gradients of the loss with
+    respect to each weight using the chain rule.
+  - Update weights: subtract a fraction (learning rate) of the gradient.
+
+The learning rate controls how large each weight update is. Too high:
+the model oscillates. Too low: training is slow or gets stuck.
+
+================================================================
+CHAPTER 6: DEEP LEARNING
+================================================================
+
+Deep learning refers to neural networks with many hidden layers (deep architectures).
+These networks can learn hierarchical representations from raw data.
+
+Convolutional Neural Networks (CNNs):
+  - Designed for grid-structured data like images.
+  - Convolutional layers learn local features (edges, textures, shapes).
+  - Pooling layers reduce spatial dimensions.
+  - Widely used in image classification, object detection.
+
+Recurrent Neural Networks (RNNs):
+  - Designed for sequential data (text, time series).
+  - Maintain a hidden state that carries information across time steps.
+  - Long Short-Term Memory (LSTM) and Gated Recurrent Unit (GRU) solve
+    the vanishing gradient problem in plain RNNs.
+
+Transformers:
+  - Architecture introduced in the 2017 paper "Attention Is All You Need".
+  - Use self-attention to relate every position in a sequence to every other.
+  - Form the basis of modern large language models (GPT, BERT, Gemini).
+  - Process sequences in parallel (unlike RNNs), enabling training at scale.
+
+================================================================
+CHAPTER 7: NATURAL LANGUAGE PROCESSING
+================================================================
+
+Natural Language Processing (NLP) is the subfield of AI that enables computers
+to understand and generate human language.
+
+Core NLP tasks:
+  - Tokenization: splitting text into words or subword units.
+  - Part-of-speech tagging: labelling each word as noun, verb, adjective, etc.
+  - Named Entity Recognition (NER): identifying names of people, places, organisations.
+  - Sentiment analysis: determining positive, negative, or neutral opinion.
+  - Machine translation: translating text between languages.
+  - Question answering: generating answers to questions from a given context.
+
+Word Embeddings:
+  - Represent words as dense numerical vectors where semantically similar
+    words are close together in the vector space.
+  - Word2Vec, GloVe: early word embedding models.
+  - BERT, GPT: contextual embeddings that capture word meaning in context.
+
+Large Language Models (LLMs):
+  - Transformer-based models trained on massive text corpora.
+  - Can generate fluent text, answer questions, summarise, and translate.
+  - Examples: GPT-4, Gemini, Claude, LLaMA.
+  - Limitation: LLMs can generate confident-sounding but factually incorrect
+    information. This is called hallucination.
+
+Retrieval-Augmented Generation (RAG):
+  - Combines a retrieval system with an LLM.
+  - The retrieval system finds relevant passages from a trusted document store.
+  - The LLM generates its answer based on those retrieved passages.
+  - RAG reduces hallucination by grounding the answer in retrieved evidence.
+  - RAG allows the LLM to answer questions about documents it was not
+    trained on.
+
+================================================================
+CHAPTER 8: AI ETHICS AND LIMITATIONS
+================================================================
+
+Bias in AI: models trained on biased data reproduce and amplify those biases.
+This can lead to discriminatory outcomes in hiring, lending, or criminal justice.
+
+Explainability: many deep learning models are "black boxes" — their decisions
+are difficult to interpret. Explainability research aims to make AI decisions
+transparent and auditable.
+
+Data privacy: AI systems require large datasets that may contain personal
+information. Responsible AI practice includes data minimization and anonymization.
+
+Automation and employment: AI automates routine cognitive tasks, raising
+questions about workforce displacement and the need for retraining.
+
+Hallucination: LLMs sometimes produce incorrect facts stated with confidence.
+RAG systems partially address this by requiring answers to be grounded in
+retrieved documents.
+
+AI safety: the challenge of ensuring that increasingly capable AI systems
+behave in ways that are beneficial and aligned with human values.
