@@ -1,4 +1,5 @@
 # ExamPilot AI 🎓
+Repository: `RAG_based_ai_assistant`
 ## Data Science Exit Exam Preparation Assistant Using Retrieval-Augmented Generation (RAG)
 
 > **Academic Project** — Fourth-Year Data Science Capstone  
