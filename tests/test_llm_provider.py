@@ -47,7 +47,7 @@ def test_generate_answer_uses_sdk_default_timeout(monkeypatch):
         "input": "Question and evidence",
         "generation_config": {
             "temperature": 0.2,
-            "max_output_tokens": 512,
+                "max_output_tokens": 2048,
         },
         "store": False,
     }

@@ -164,7 +164,7 @@ def generate_answer(prompt: str, model_name: str = "gemini-3.8-flash") -> dict:
             input=prompt,
             generation_config={
                 "temperature": 0.2,
-                "max_output_tokens": 512,
+                "max_output_tokens": 2048,
             },
             store=False,
         )
