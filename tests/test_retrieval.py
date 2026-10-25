@@ -244,8 +244,9 @@ def test_generate_course_quiz_parses_questions_from_material(monkeypatch):
     }
     seen_prompts = []
 
-    def fake_generate_answer(prompt):
+    def fake_generate_answer(prompt, **kwargs):
         seen_prompts.append(prompt)
+        assert kwargs["max_output_tokens"] == 8192
         import json
         return {"success": True, "answer": json.dumps(generated)}
 
@@ -260,7 +261,7 @@ def test_generate_course_quiz_parses_questions_from_material(monkeypatch):
 def test_generate_course_quiz_falls_back_when_api_quota_is_exhausted(monkeypatch):
     monkeypatch.setattr(
         "src.quiz.generate_answer",
-        lambda prompt: {"success": False, "error": "API quota exceeded."},
+        lambda prompt, **kwargs: {"success": False, "error": "API quota exceeded."},
     )
     chunks = [{
         "source": "biology.txt",
@@ -284,7 +285,7 @@ def test_generate_course_quiz_falls_back_when_api_quota_is_exhausted(monkeypatch
 def test_generate_course_quiz_falls_back_when_model_returns_invalid_json(monkeypatch):
     monkeypatch.setattr(
         "src.quiz.generate_answer",
-        lambda prompt: {"success": True, "answer": "This response is not JSON."},
+        lambda prompt, **kwargs: {"success": True, "answer": "This response is not JSON."},
     )
     chunks = [{
         "source": "biology.txt",

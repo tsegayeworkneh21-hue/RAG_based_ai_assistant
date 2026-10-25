@@ -121,7 +121,11 @@ def format_generation_error(error: str) -> str:
     return error
 
 
-def generate_answer(prompt: str, model_name: str = "gemini-3.8-flash") -> dict:
+def generate_answer(
+    prompt: str,
+    model_name: str = "gemini-3.8-flash",
+    max_output_tokens: int = 2048,
+) -> dict:
     """
     Send the prompt to the Gemini API and return the generated answer.
 
@@ -134,6 +138,7 @@ def generate_answer(prompt: str, model_name: str = "gemini-3.8-flash") -> dict:
     ----------
     prompt     : The full prompt string (system instructions + context + question).
     model_name : The Gemini model variant to use.
+    max_output_tokens : Maximum number of tokens Gemini may generate.
 
     Returns
     -------
@@ -164,7 +169,7 @@ def generate_answer(prompt: str, model_name: str = "gemini-3.8-flash") -> dict:
             input=prompt,
             generation_config={
                 "temperature": 0.2,
-                "max_output_tokens": 2048,
+                "max_output_tokens": max_output_tokens,
             },
             store=False,
         )

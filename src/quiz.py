@@ -306,14 +306,14 @@ def generate_course_quiz(chunks: list[dict], question_count: int = 8) -> dict:
         return {"questions": [], "error": "The loaded course contains no readable text."}
 
     prompt = f"""Create {question_count} distinct multiple-choice study questions using only the course excerpts below.
-Return valid JSON only, with this shape:
+Return valid JSON only, with this shape. Keep questions, answer choices, and explanations concise so all {question_count} questions fit in one response:
 {{"questions": [{{"subject": "topic", "question": "...", "options": {{"A": "...", "B": "...", "C": "...", "D": "..."}}, "answer": "A", "explanation": "..."}}]}}
 Make exactly one option correct for each question. Keep every answer and explanation supported by the excerpts. Do not invent facts.
 
 COURSE EXCERPTS:
 {chr(10).join(context_parts)}"""
 
-    response = generate_answer(prompt)
+    response = generate_answer(prompt, max_output_tokens=8192)
     if not response.get("success"):
         error = response.get("error") or "Question generation failed."
         return _course_quiz_fallback(chunks, question_count, error)

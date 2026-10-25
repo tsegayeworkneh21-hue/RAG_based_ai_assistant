@@ -53,6 +53,18 @@ def test_generate_answer_uses_sdk_default_timeout(monkeypatch):
     }
 
 
+def test_generate_answer_uses_requested_output_token_limit(monkeypatch):
+    captured = _fake_genai(
+        monkeypatch,
+        lambda **kwargs: SimpleNamespace(output_text='{"questions": []}'),
+    )
+
+    result = llm_provider.generate_answer("Create a quiz", max_output_tokens=8192)
+
+    assert result["success"] is True
+    assert captured["interaction_request"]["generation_config"]["max_output_tokens"] == 8192
+
+
 def test_generate_answer_reports_timeout_actionably(monkeypatch):
     def create_interaction(**kwargs):
         assert kwargs["input"] == "Question and evidence"

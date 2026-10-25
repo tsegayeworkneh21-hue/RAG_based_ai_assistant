@@ -49,8 +49,10 @@ For sentence embeddings, cosine similarity is preferred over Euclidean distance
 because it is scale-invariant — it does not depend on how long the text is.
 """
 
-import numpy as np
+import re
 from typing import Optional
+
+import numpy as np
 
 from src.config import DEFAULT_CONFIG
 
@@ -177,6 +179,38 @@ def embed_query(query: str, model_name: str = DEFAULT_CONFIG.embedding_model) ->
     return None
 
 
+def _keyword_overlap_score(query: str, text: str) -> float:
+    """Lightweight lexical boost for short, semantically relevant queries.
+
+    Embedding similarity is the primary signal, but short questions such as
+    "What is RAG?" can still match a relevant document weakly because the
+    abbreviation is uncommon or the wording differs. Adding a small lexical
+    overlap term helps retrieve the right chunk while keeping off-topic queries
+    below the evidence threshold.
+    """
+    if not query or not text:
+        return 0.0
+
+    query_terms = {
+        token
+        for token in re.findall(r"[a-z0-9]+", query.lower())
+        if len(token) > 2 and token not in {"what", "when", "where", "why", "which", "with", "from", "into"}
+    }
+    if not query_terms:
+        return 0.0
+
+    doc_terms = {
+        token
+        for token in re.findall(r"[a-z0-9]+", text.lower())
+        if len(token) > 2
+    }
+    if not doc_terms:
+        return 0.0
+
+    overlap = len(query_terms & doc_terms)
+    return (overlap / max(len(query_terms), 1)) * 0.2
+
+
 # ---------------------------------------------------------------------------
 # In-memory vector index
 # ---------------------------------------------------------------------------
@@ -289,11 +323,16 @@ class VectorIndex:
         # [::-1] reverses to descending order.
         ranked_indices = np.argsort(scores)[::-1]
 
-        # Step 4: Take the top_k results and attach their scores
+        # Step 4: Take the top_k results and attach their scores.
+        # We apply a small lexical-overlap boost to short or abbreviation-heavy
+        # questions (e.g. 'What is RAG?') so relevant material is not filtered
+        # out just because the embedding similarity is close to the threshold.
         results = []
         for idx in ranked_indices[:top_k]:
-            chunk = dict(self.chunks[idx])       # Copy the chunk dict
-            chunk["score"] = float(scores[idx])  # Add the similarity score
+            chunk = dict(self.chunks[idx])
+            semantic_score = float(scores[idx])
+            lexical_boost = _keyword_overlap_score(query, chunk.get("text", ""))
+            chunk["score"] = semantic_score + lexical_boost
             results.append(chunk)
 
         return results
